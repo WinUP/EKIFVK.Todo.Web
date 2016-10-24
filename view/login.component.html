@@ -1,0 +1,18 @@
+<div class="login-box" [@loginState]="loginState" (@loginState.done)="stateChanged($event)">
+    <p>Login</p>
+    <form class="bs-component">
+        <div class="form-group">
+            <label class="control-label" for="username">Username</label>
+            <input class="form-control" id="username" name="username" type="text" [(ngModel)]="username">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input class="form-control" id="password" name="password" type="password" [(ngModel)]="password">
+        </div>
+        <md-checkbox [(ngModel)]="rememberMe" name="remember">Remember me</md-checkbox>
+        <p class="text-danger text-center">{{message}}</p>
+        <button type="button" class="btn btn-primary btn-block" [disabled]="loginState=='logging'" (click)="login()">Login</button>
+        <button type="button" class="btn btn-link btn-block" [disabled]="loginState=='logging'" (click)="register()">Register</button>
+    </form>
+</div>
+<div class="effect" id="effect"  [@loginState]="loginState"></div>

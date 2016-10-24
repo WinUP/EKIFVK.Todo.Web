@@ -1,0 +1,4 @@
+<task *ngFor="let task of tasks" [task]="task" (afterRemoved)="onTaskRemoved(task)"></task>
+<button type="button" class="btn btn-primary btn-block" [disabled]="this.finished" (click)="read()">
+    {{this.isFinished ? 'All loaded' : 'Find more'}}
+</button>

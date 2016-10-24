@@ -1,0 +1,13 @@
+<md-card [@removeState]="removeState" (@removeState.done)="stateChanged($event)">
+    <md-card-subtitle [hidden]="task.deadline==null">
+        <span class="glyphicon glyphicon-dashboard"></span>
+        &nbsp;Due: {{task.deadline | date:"yyyy-MM-dd HH:mm:ss"}}
+    </md-card-subtitle>
+    <md-card-title>{{task.name}}</md-card-title>   
+    <md-card-content>{{task.description}}</md-card-content>
+    <md-card-actions>
+        <button md-button color="accent" [hidden]="task.finished" (click)="finish(task)"><span class="glyphicon glyphicon-ok"></span>&nbsp;FINISH THIS</button>
+        <button md-button color="primary" [hidden]="!task.finished" (click)="unfinish(task)"><span class="glyphicon glyphicon-remove"></span>&nbsp;UNFINISH THIS</button>
+        <button md-button color="warn" class="pull-right"  (click)="remove(task)"><span class="glyphicon glyphicon-trash"></span>&nbsp;REMOVE</button>
+    </md-card-actions>
+</md-card>

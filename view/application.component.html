@@ -1,0 +1,7 @@
+<md-toolbar color="accent">
+    <span>TODO</span>
+    <span style="flex:1 1 auto"></span>
+    <span [hidden]="isLogon!='true'" (click)="logout()">LOGOUT</span>
+</md-toolbar>
+<router-outlet></router-outlet>
+<simple-notifications [options]="NotificationOptions"></simple-notifications>
