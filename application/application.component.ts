@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router'
 import { Response } from '@angular/http'
 import { ResponseData } from './server'
@@ -20,7 +20,8 @@ export class ApplicationComponent {
 		animate: 'fromLeft'
 	}
 
-    constructor(private router: Router,
+    constructor(private viewContainerRef: ViewContainerRef,
+				private router: Router,
 				private message: MessageService,
 				private storage: UserStorageService,
 				private user: UserService){

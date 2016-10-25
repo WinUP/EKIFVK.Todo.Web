@@ -1,17 +1,19 @@
 <div class="col-sm-3">
     <p style="padding-left:10px"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{username}}</p>
     <task-filter (filterChanged)="refresh($event)"></task-filter>
-    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#newTaskModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New Task</button>
+    <button type="button" class="btn btn-success btn-block" (click)="showNewTaskModal()"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New Task</button>
 </div>
 <div class="col-sm-9 content">
     <task-list [filter]="filter"></task-list>
 </div>
-<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
+<div bsModal #newTaskModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="newTaskModalLabel">New Task</h4>
+                <button type="button" class="close" aria-label="Close" (click)="hideNewTaskModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">New Task</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">

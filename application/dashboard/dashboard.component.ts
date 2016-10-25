@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Response } from '@angular/http'
 import { Router } from '@angular/router'
+import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { ResponseData } from '../server'
 import { UserStorageService, CachedUser } from '../user/user-storage.service'
 import { Task, TaskService } from '../task/task.service'
@@ -14,6 +15,7 @@ import { handleServerError } from '../message/message.service'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(TaskListComponent) private taskComponent: TaskListComponent;
+    @ViewChild('newTaskModal') private newTaskModal: ModalDirective;
     private filter: TaskFilter ={
         showFinished: true,
         showUnfinish: true,
@@ -50,8 +52,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.elementRef.nativeElement.appendChild(s);
         this.taskComponent.read();
     }
-    refresh(filter: TaskFilter) {
-        console.log(filter);
+    public refresh(filter: TaskFilter): void {
         this.filter = {
             showFinished: filter.showFinished,
             showUnfinish: filter.showUnfinish,
@@ -59,7 +60,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             showUnSchedule: filter.showUnSchedule
         }
     }
-    addTask() {
+    public showNewTaskModal(): void {
+        this.newTaskModal.show();
+    }
+    public hideNewTaskModal(): void {
+        this.newTaskModal.hide();
+    }
+    public addTask(): void {
         if (this.newTask.name == '') {
             this.addMessage = 'Name must be given';
             return;
@@ -74,7 +81,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 this.newTask.name = '';
                 this.newTask.description = '';
                 this.newTask.deadline = '';
-                $('#newTaskModal').modal('hide');
+                this.hideNewTaskModal();
             }, handleServerError
         );
     }
