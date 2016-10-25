@@ -15,8 +15,8 @@
             '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
             '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-        
             '@angular/material': 'npm:@angular/material/material.umd.js',
+
             'angular2-notifications': 'npm:angular2-notifications',
             'ng2-bootstrap/ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
 
