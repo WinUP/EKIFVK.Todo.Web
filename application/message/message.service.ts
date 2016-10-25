@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Response } from '@angular/http'
 import { Subject }    from 'rxjs/Subject'
 import { Notification, Options, NotificationsService } from 'angular2-notifications'
-import { ResponseData } from '../server'
+import { ResponseData, ServerConst, ServerMessage } from '../server'
 
 export enum MessageType {
     Alert,
@@ -20,9 +20,13 @@ export interface Message {
 
 export function handleServerError(error: Response): void {
     var data: ResponseData = error.json();
+
+    var content = ServerConst[data.message] != undefined
+                ? ServerMessage[ServerConst[data.message]]
+                : data.message;
         this.message.show({
-            title: 'ERROR',
-            content: data.message,
+            title: 'SERVER ERROR',
+            content: content,
             type: MessageType.Error
         });
 }

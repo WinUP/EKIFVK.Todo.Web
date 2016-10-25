@@ -18,7 +18,9 @@
         
             '@angular/material': 'npm:@angular/material/material.umd.js',
             'angular2-notifications': 'npm:angular2-notifications',
-        
+            'ng2-bootstrap/ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+
+            'moment': 'npm:moment/moment.js',
             'rxjs': 'npm:rxjs',
             'crypto-js': 'npm:crypto-js'
         },

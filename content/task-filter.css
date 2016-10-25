@@ -1,0 +1,11 @@
+.filter md-checkbox {
+    display: block;
+}
+.filter button {
+    margin-top: 10px;
+}
+@media(max-width: 768px) {
+    .filter {
+        margin-bottom: 20px;
+    }
+}

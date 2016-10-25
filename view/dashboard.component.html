@@ -1,22 +1,10 @@
-<div class="col-sm-3 filter">
-    <p><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{username}}</p>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">ONLY SHOW</h3>
-        </div>
-        <div class="panel-body">
-            <md-checkbox [(ngModel)]="tempFilter.showFinished">Finished Task</md-checkbox>
-            <md-checkbox [(ngModel)]="tempFilter.showUnfinish">Unfinish Task</md-checkbox>
-            <md-checkbox [(ngModel)]="tempFilter.showScheduled">Task has due date</md-checkbox>
-            <md-checkbox [(ngModel)]="tempFilter.showUnSchedule">Tak has no due date</md-checkbox>
-            <button type="button" class="btn btn-primary btn-block" (click)="refresh()">Apply</button>
-        </div>
-    </div>
+<div class="col-sm-3">
+    <p style="padding-left:10px"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{username}}</p>
+    <task-filter (filterChanged)="refresh($event)"></task-filter>
     <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#newTaskModal"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;New Task</button>
 </div>
 <div class="col-sm-9 content">
     <task-list [filter]="filter"></task-list>
-    <task *ngFor="let task of tasks" [task]="task" (afterRemoved)="removeTask(task)"></task>
 </div>
 <div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -32,11 +20,11 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="tasDescription">Description</label>
-                    <input class="form-control" id="tasDescription" type="text" [(ngModel)]="newTask.description">
+                    <input class="form-control" id="tasDescription" type="text" [(ngModel)]="newTask.description" placeholder="Optional">
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="taskDueDate">Due date</label>
-                    <input class="form-control" id="taskDueDate" type="datetime" [(ngModel)]="newTask.deadline">
+                    <input class="form-control" id="taskDueDate" type="datetime" [(ngModel)]="newTask.deadline" placeholder="Optional">
                 </div>
                 <p class="text-danger">{{addMessage}}</p>
             </div>

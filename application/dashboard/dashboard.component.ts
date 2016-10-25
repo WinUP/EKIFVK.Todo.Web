@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Response } from '@angular/http'
 import { Router } from '@angular/router'
-import { ResponseData, ServerConst, ServerMessage } from '../server'
+import { ResponseData } from '../server'
 import { UserStorageService, CachedUser } from '../user/user-storage.service'
-import { Task, TaskQueryParams, TaskService } from '../task/task.service'
+import { Task, TaskService } from '../task/task.service'
 import { TaskListComponent, TaskFilter } from '../task/task-list.component'
-import { MessageType, handleServerError } from '../message/message.service'
+import { handleServerError } from '../message/message.service'
 
 @Component({
     selector: 'dashboard',
@@ -14,13 +14,6 @@ import { MessageType, handleServerError } from '../message/message.service'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
     @ViewChild(TaskListComponent) private taskComponent: TaskListComponent;
-
-    private tempFilter: TaskFilter = {
-        showFinished: true,
-        showUnfinish: true,
-        showScheduled: true,
-        showUnSchedule: true
-    }
     private filter: TaskFilter ={
         showFinished: true,
         showUnfinish: true,
@@ -57,12 +50,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         this.elementRef.nativeElement.appendChild(s);
         this.taskComponent.read();
     }
-    refresh() {
+    refresh(filter: TaskFilter) {
+        console.log(filter);
         this.filter = {
-            showFinished: this.tempFilter.showFinished,
-            showUnfinish: this.tempFilter.showUnfinish,
-            showScheduled: this.tempFilter.showScheduled,
-            showUnSchedule: this.tempFilter.showUnSchedule
+            showFinished: filter.showFinished,
+            showUnfinish: filter.showUnfinish,
+            showScheduled: filter.showScheduled,
+            showUnSchedule: filter.showUnSchedule
         }
     }
     addTask() {
