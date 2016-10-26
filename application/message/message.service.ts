@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, ReflectiveInjector } from '@angular/core'
 import { Response } from '@angular/http'
 import { Subject }    from 'rxjs/Subject'
 import { Notification, Options, NotificationsService } from 'angular2-notifications'
@@ -18,23 +18,12 @@ export interface Message {
     options?: Options
 }
 
-export function handleServerError(error: Response): void {
-    var data: ResponseData = error.json();
-
-    var content = ServerConst[data.message] != undefined
-                ? ServerMessage[ServerConst[data.message]]
-                : data.message;
-        this.message.show({
-            title: 'SERVER ERROR',
-            content: content,
-            type: MessageType.Error
-        });
-}
+var safePointer: MessageService = null;
 
 @Injectable()
 export class MessageService {
     constructor(private notify: NotificationsService) {
-
+        safePointer = this;
     }
 
     public show(message: Message) : Notification {
@@ -50,5 +39,17 @@ export class MessageService {
     }
     public clear(): void {
         this.notify.remove();
+    }
+    public handleServerError(error: Response): void {
+    var data: ResponseData = error.json();
+        var content = ServerConst[data.message] != undefined
+                    ? ServerMessage[ServerConst[data.message]]
+                    : data.message;
+        console.log(this);
+        safePointer.show({
+            title: 'SERVER ERROR',
+            content: content,
+            type: MessageType.Error
+        });
     }
 }

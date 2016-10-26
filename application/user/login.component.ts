@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ElementRef, trigger, state, style, transition, animate, AnimationTransitionEvent } from '@angular/core';
 import { Response } from '@angular/http'
 import { Router, ActivatedRoute, Params } from '@angular/router'
+import { MessageService } from '../message/message.service'
 import { UserService } from './user.service'
 import { UserStorageService, StoragedUser, CachedUser } from './user-storage.service'
 import { ResponseData, ServerConst, ServerMessage } from '../server'
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     constructor(private router: Router,
                 private activateRoute: ActivatedRoute,
                 private elementRef: ElementRef,
+                private messageService: MessageService,
                 private user: UserService,
                 private storage: UserStorageService) {        
     

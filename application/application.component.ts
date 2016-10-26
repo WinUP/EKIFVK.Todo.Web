@@ -4,7 +4,7 @@ import { Response } from '@angular/http'
 import { ResponseData } from './server'
 import { UserStorageService, StoragedUser, CachedUser } from './user/user-storage.service'
 import { UserService } from './user/user.service'
-import { MessageService, handleServerError } from './message/message.service'
+import { MessageService } from './message/message.service'
 
 @Component({
     providers: [],
@@ -15,7 +15,7 @@ export class ApplicationComponent {
 	private isLogon: string;
 	private NotificationOptions = {
 		position: ['bottom', 'left'],
-		timeOut: 6000,
+		timeOut: 10000,
 		showProgressBar: false,
 		animate: 'fromLeft'
 	}
@@ -38,7 +38,7 @@ export class ApplicationComponent {
 				this.storage.cache(CachedUser.IsLogon, 'false');
 				this.storage.cache(CachedUser.Username, null);
 				this.router.navigate(['/login']);
-            }, handleServerError
+            }, this.message.handleServerError
 		);
 	}
 }

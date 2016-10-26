@@ -6,7 +6,7 @@ import { ResponseData } from '../server'
 import { UserStorageService, CachedUser } from '../user/user-storage.service'
 import { Task, TaskService } from '../task/task.service'
 import { TaskListComponent, TaskFilter } from '../task/task-list.component'
-import { handleServerError } from '../message/message.service'
+import { MessageService } from '../message/message.service'
 
 @Component({
     selector: 'dashboard',
@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router,
                 private elementRef: ElementRef,
+                private message: MessageService,
                 private storage: UserStorageService,
                 private task: TaskService) {        
 
@@ -46,11 +47,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        //TODO: 这种代码很难看，有机会删掉所有直接的html操作，顺便去掉jQuery
         var s = document.createElement('script');
-        s.type = 'text/javascript';
         s.innerHTML = '$("#taskDueDate").datetimepicker({format:"yyyy-mm-dd hh:ii:ss",autoclose:true});';
         this.elementRef.nativeElement.appendChild(s);
-        this.taskComponent.read();
+        this.taskComponent.read();        
     }
     public refresh(filter: TaskFilter): void {
         this.filter = {
@@ -82,7 +83,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 this.newTask.description = '';
                 this.newTask.deadline = '';
                 this.hideNewTaskModal();
-            }, handleServerError
+            }, this.message.handleServerError
         );
     }
 }
