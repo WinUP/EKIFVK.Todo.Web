@@ -28,10 +28,10 @@ var ServerMessage = {
     "PERMISSION_EMPTYACCOUNT": "Cannot find account",
     "PERMISSION_DENIED": "Permission denied",
 
-    "INVALID_NAME": "Cannot find user",
+    "INVALID_NAME": "Cannot find resource",
     "INVALID_PASSWORD": "Password is not correct",
     "LOGIN_TOOCLOSE": "Cannot login twice in one minute",
-    "ALREADY_EXIST": "Data already exist",
+    "ALREADY_EXIST": "Resource already exist",
     "LOGIN_DENIED": "Your account is disabled",
     "INVALID_PARAM": "Paramater is invalid",
     "SERVER_ERROR": "Server error",
