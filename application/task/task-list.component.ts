@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Response } from '@angular/http'
 import { ResponseData } from '../server'
 import { Task, TaskQueryParams, TaskService } from '../task/task.service'
-import { handleServerError } from '../message/message.service'
+import { MessageService } from '../message/message.service'
 
 export interface TaskFilter {
     showFinished: boolean,
@@ -60,7 +60,7 @@ export class TaskListComponent {
         return this._filter;
     }
 
-    constructor(private task: TaskService) {        
+    constructor(private task: TaskService, private message: MessageService) {        
         this.tasks = new Array<Task>();
     }
 
@@ -76,7 +76,7 @@ export class TaskListComponent {
                 this.tasks = this.tasks.concat(data.data);
                 if (data.data.length < 10) this.finished = true;
                 else this.finished = false;
-            }, handleServerError
+            }, this.message.handleServerError
         );
     }
     public add(task: Task): void {
