@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core'
 import { TaskFilter } from '../task/task-list.component'
-import { handleServerError } from '../message/message.service'
 
 @Component({
     selector: 'task-filter',

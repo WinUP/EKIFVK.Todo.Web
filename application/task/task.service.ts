@@ -42,7 +42,7 @@ export class TaskService {
         return this.http.delete(`/task/${id}`);
     }
     add(task: Task): Observable<Response> {
-        var param = {
+        var param: any = {
             name: task.name,
             description: task.description
         }

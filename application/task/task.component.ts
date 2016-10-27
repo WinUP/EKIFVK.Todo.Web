@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, trigger, state, style, transiti
 import { Response } from '@angular/http'
 import { ResponseData } from '../server'
 import { Task, TaskService } from './task.service'
-import { handleServerError } from '../message/message.service'
+import { MessageService } from '../message/message.service'
 
 @Component({
     selector: 'task',
@@ -32,7 +32,7 @@ export class TaskComponent {
     @Output() afterFinished = new EventEmitter();
     @Output() afterUnfinish = new EventEmitter();
 
-    constructor(private taskService: TaskService){
+    constructor(private taskService: TaskService, private message: MessageService){
         this.removeState = 'waiting'
     }
 
@@ -47,7 +47,7 @@ export class TaskComponent {
             (value: Response) => {
                 this.task.finished = true;
                 this.afterFinished.emit();
-            }, handleServerError
+            }, this.message.handleServerError
         );
     }
     public unfinish(): void {
@@ -55,7 +55,7 @@ export class TaskComponent {
             (value: Response) => {
                 this.task.finished = false;
                 this.afterUnfinish.emit();
-            }, handleServerError
+            }, this.message.handleServerError
         );
     }
     public remove(): void {
@@ -63,7 +63,7 @@ export class TaskComponent {
         this.taskService.remove(this.task.id).subscribe(
             (value: Response) => {
                 this.removeState = 'finished';
-            }, handleServerError
+            }, this.message.handleServerError
         );
     }
 }
